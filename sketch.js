@@ -1,14 +1,21 @@
-let xoff = 0,
-	xof = 100000000000,
-	bee
+let xoff = 0
 
 function setup() {
-	//createCanvas(1080, 720)
+	createCanvas(1080, 720);
+	//createCanvas(1080, 720) 
 	createCanvas(500, 300)
-	bee =	new Bee()
 }
 
 function draw() {
 	background(51)
-	bee.show()
+	stroke(255)
+	noFill()
+	beginShape()
+	for (var x = 0; x < width; x++) {
+		//vertex(x,random(height))
+		vertex(x, map(noise(xoff), 0, 1, 0, height))
+		xoff += 0.03
+	}
+	endShape()
+	noLoop()
 }
