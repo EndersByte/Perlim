@@ -1,7 +1,7 @@
 let xoff = 0
 
 function setup() {
-	createCanvas(1080, 720);
+	//createCanvas(1080, 720);
 	//createCanvas(1080, 720) 
 	createCanvas(500, 300)
 }
