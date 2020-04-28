@@ -1,13 +1,13 @@
+let inc = 0.01
+let start = 0
 
-let xoff = 0.000000000000000000001
 function setup() {
-	//createCanvas(1080, 720);
 	//createCanvas(1080, 720) 
 	createCanvas(500, 300)
 }
 
 function draw() {
-	
+	let xoff = start
 	background(51)
 	stroke(255)
 	noFill()
@@ -16,9 +16,10 @@ function draw() {
 		//let y = vertex(x,random(height))
 		let y = map(noise(xoff), 0, 1, 0, height)
 		vertex(x, y)
-		xoff += 0.01
+		xoff += inc
 	}
 	endShape()
 	//noLoop()
-	frameRate(2)
+	//frameRate(2)
+	start += inc
 }
