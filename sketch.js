@@ -1,5 +1,5 @@
-let xoff = 0
 
+let xoff = 0.000000000000000000001
 function setup() {
 	//createCanvas(1080, 720);
 	//createCanvas(1080, 720) 
@@ -7,15 +7,18 @@ function setup() {
 }
 
 function draw() {
+	
 	background(51)
 	stroke(255)
 	noFill()
 	beginShape()
 	for (var x = 0; x < width; x++) {
-		//vertex(x,random(height))
-		vertex(x, map(noise(xoff), 0, 1, 0, height))
-		xoff += 0.03
+		//let y = vertex(x,random(height))
+		let y = map(noise(xoff), 0, 1, 0, height)
+		vertex(x, y)
+		xoff += 0.01
 	}
 	endShape()
-	noLoop()
+	//noLoop()
+	frameRate(2)
 }
