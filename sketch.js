@@ -1,28 +1,29 @@
 let inc = 0.01
+let scl = 20
+let cols, rows
 
 function setup() {
 	createCanvas(300, 300)
-
+	cols = floor(width / scl)
+	rows = floor(height / scl)
 }
 
 function draw() {
 	background(51)
-	loadPixels()
+	
 	let yoff = 0
-	for (let y = 0; y < height; y++) {
+	for (let y = 0; y < rows; y++) {
 		let xoff = 0
-		for (let x = 0; x < width; x++) {
+		for (let x = 0; x < cols; x++) {
 			let index = (x + y * width) * 4
-			//let r = random(255)
-			let r = noise(xoff, yoff) * 255
-			pixels[index] = r
-			pixels[index + 1] = r
-			pixels[index + 2] = r
-			pixels[index + 3] = 255
-			xoff -= inc
+			let r = random(255)
+			//let r = noise(xoff, yoff) * 255
+			fill (r)
+			rect(x*scl,y*scl,scl,scl)
+			xoff += inc
 		}
 		yoff += inc
 	}
-	updatePixels()
-	noLoop()
+	
+	//noLoop()
 }
