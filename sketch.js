@@ -1,25 +1,22 @@
-let inc = 0.01
-let start = 0
-
+let xoff=0
+let inc =0.01
 function setup() {
-	//createCanvas(1080, 720) 
-	createCanvas(500, 300)
+	createCanvas(300, 300)
+
 }
 
 function draw() {
-	let xoff = start
 	background(51)
-	stroke(255)
-	noFill()
-	beginShape()
-	for (var x = 0; x < width; x++) {
-		//let y = vertex(x,random(height))
-		let y = map(noise(xoff), 0, 1, 0, height)
-		vertex(x, y)
-		xoff += inc
+	loadPixels()
+	for (let y = 0; y < height; y++) {
+		for (let x = 0; x < width; x++) {
+			let index = (x + y * width) * 4
+			let r = random(255)
+			pixels[index] = r
+			pixels[index + 1] = r
+			pixels[index + 2] = r
+			pixels[index + 3] = 255
+		}
 	}
-	endShape()
-	//noLoop()
-	//frameRate(2)
-	start += inc
+	updatePixels()
 }
