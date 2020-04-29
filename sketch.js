@@ -1,12 +1,12 @@
 let inc = 0.2
-let scl = 5
-let cols, rows
-let yoff, xoff
+let scl = 30
+let cols, rows, yoff, xoff, fr
 
 function setup() {
 	createCanvas(480, 360)
 	cols = floor(width / scl)
 	rows = floor(height / scl)
+	fr= createP('')
 }
 
 function draw() {
@@ -25,5 +25,6 @@ function draw() {
 		}
 		yoff += inc
 	}
+	fr.html(floor(frameRate()))
 	//noLoop()
 }
