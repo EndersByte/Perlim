@@ -19,9 +19,10 @@ function draw() {
 			pixels[index + 1] = r
 			pixels[index + 2] = r
 			pixels[index + 3] = 255
-			xoff += inc
+			xoff -= inc
 		}
 		yoff += inc
 	}
 	updatePixels()
+	noLoop()
 }
