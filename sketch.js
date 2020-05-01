@@ -6,15 +6,15 @@ let inc = 0.1,
 	zoff = 0,
 	fr,
 	particles = [],
-	vecfield= new Array(cols*rows)
+	vecField
 
 function setup() {
-	createCanvas(480, 360)
+	createCanvas(400, 300)
 	cols = floor(width / scl)
 	rows = floor(height / scl)
 	fr = createP('')
-
-	for (let i = 0; i < 100; i++) {
+	vecField = Array(cols * rows)
+	for (let i = 0; i < 300; i++) {
 		particles[i] = new Particle()
 	}
 }
@@ -25,23 +25,25 @@ function draw() {
 	for (let y = 0; y < rows; y++) {
 		xoff = 0.00000000001
 		for (let x = 0; x < cols; x++) {
-			let index = (x + y * cols)
+			let index = x + y * cols
 			//let r = random(255)
-			let r = noise(xoff, yoff, zoff) * TWO_PI
-			v = p5.Vector.fromAngle(r)
+			let r = noise(xoff, yoff, zoff) * TWO_PI*2
+			vecField[index] = p5.Vector.fromAngle(r)
+			vecField[index].setMag(0.1)
 			xoff += inc
-			stroke(255,30)
+			stroke(255, 30)
 			push()
 			translate(x * scl, y * scl)
-			rotate(v.heading())
+			rotate(vecField[index].heading())
 			strokeWeight(1)
-			line(0, 0, scl, 0)
+			//line(0, 0, scl, 0)
 			pop()
 		}
 		yoff += inc
-		zoff += 0.0008
+		zoff += 0.0005
 	}
 	for (let k = 0; k < particles.length; k++) {
+		particles[k].follow(vecField)
 		particles[k].update()
 		particles[k].show()
 		particles[k].edges()
