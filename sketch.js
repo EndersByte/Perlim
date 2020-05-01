@@ -9,29 +9,29 @@ let inc = 0.1,
 	vecField
 
 function setup() {
-	createCanvas(400, 300)
+	createCanvas(600, 400)
 	cols = floor(width / scl)
 	rows = floor(height / scl)
 	fr = createP('')
 	vecField = Array(cols * rows)
-	for (let i = 0; i < 300; i++) {
+	for (let i = 0; i < 1000; i++) {
 		particles[i] = new Particle()
 	}
+	background(255)
 }
 
 function draw() {
-	background(0)
 	yoff = 0
 	for (let y = 0; y < rows; y++) {
 		xoff = 0.00000000001
 		for (let x = 0; x < cols; x++) {
 			let index = x + y * cols
 			//let r = random(255)
-			let r = noise(xoff, yoff, zoff) * TWO_PI*2
+			let r = noise(xoff, yoff, zoff) *TWO_PI* 2.281828182818/2
 			vecField[index] = p5.Vector.fromAngle(r)
-			vecField[index].setMag(0.1)
+			vecField[index].setMag(2)
 			xoff += inc
-			stroke(255, 30)
+			//stroke(0, 30)
 			push()
 			translate(x * scl, y * scl)
 			rotate(vecField[index].heading())
@@ -45,8 +45,8 @@ function draw() {
 	for (let k = 0; k < particles.length; k++) {
 		particles[k].follow(vecField)
 		particles[k].update()
-		particles[k].show()
 		particles[k].edges()
+		particles[k].show()
 	}
 	fr.html(floor(frameRate()))
 	//noLoop()
